@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:5080
+
+### Auto-settled (approved)
+POST {{baseUrl}}/claim-settlement
+Content-Type: application/json
+
+{
+  "policyNumber": "POL-1",
+  "claimAmount": 2500,
+  "propertyAgeYears": 10
+}
+
+### Adjuster review required (over threshold)
+POST {{baseUrl}}/claim-settlement
+Content-Type: application/json
+
+{
+  "policyNumber": "POL-1",
+  "claimAmount": 3500,
+  "propertyAgeYears": 10
+}
+
+### Coverage limit exceeded
+POST {{baseUrl}}/claim-settlement
+Content-Type: application/json
+
+{
+  "policyNumber": "POL-1",
+  "claimAmount": 20000,
+  "propertyAgeYears": 10
+}
+
+### Invalid input (400)
+POST {{baseUrl}}/claim-settlement
+Content-Type: application/json
+
+{
+  "policyNumber": "",
+  "claimAmount": 0,
+  "propertyAgeYears": -1
+}
